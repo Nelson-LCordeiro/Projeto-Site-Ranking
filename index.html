@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="cabecalho">
+        <h1> BETTER RANKS</h1>
+
+        <nav>
+            <ul>
+                  <li><a href="index.html">Início</a></li>
+                  <li>
+                      <a href="#" id="eventoLink">Evento</a>
+                      <ul>
+                          <li><a href="campeonato.html">Campeonato</a></li>
+                          <li><a href="festival.html">Festival</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="sobre o projeto.html">Sobre o Projeto</a></li>
+                  <li><a href="contato.html">Contato</a></li>
+            </ul>     
+         </nav>
+
+    </div>
+  
+  <div class="container">
+    
+<h2>Seja bem-vindo ao Better Ranks!</h2>
+   
+  <div class="intro">
+    <div class="texto-imagem">
+      <h3>Este site é um simples sistema de pontuação on line. Nele, podemos criar ou adicionar critérios para inserção das notas dos participantes, de acordo com a modalidade do evento (Campeonato ou Festival), bem como o valor de atribuição das notas.
+      Para utilizá-lo basta inserir as notas dos participantes e clicar em salvar. 
+      </h3>
+      <img src="./imagens/pexels-nick-gorniok-495871763-18903607.jpg" alt="vários troféus">
+    </div>
+  </div>
+  
+   <script>
+        document.getElementById('eventoLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('Por favor escolha uma das opções de evento!');
+        });
+    </script>
+</div>
+    <footer>
+        <p>&copy; 2025 - BETTER RANKS - Todos os direitos reservados.</p>
+        <p>Minhas redes sociais:</p>
+        <div class="social-icons">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin-in"></a>
+        </div>
+    </footer>
+
+</body>
+</html>

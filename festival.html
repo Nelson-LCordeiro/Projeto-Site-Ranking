@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="cabecalho">
+        <h1>BETTER RANKS</h1> 
+
+        <nav>
+            <ul>
+                  <li><a href="index.html">Início</a></li>
+                  <li>
+                      <a href="festival.html">Festival</a>
+                      
+                  </li>
+                  
+            </ul>     
+         </nav>
+
+    </div>
+ <div class="txtfest"> <h2>Festival - Modalidade Interpretação e Composição:</h2><br>
+    <p style="text-align: center;">Este é um sistema de avaliação para um festival de música. Permite que o usuário insira os dados de interpretação e composição de uma música, e calcule a sua nota total . <p  style="text-align: center;">O sistema também permite que o usuário salve as notas, exibindo um ranking dos Participantes inscritos no festival.</p></p></div>
+
+    <script src="script.js"></script>
+
+    <div class="quadro">
+        <h2>Interpretação:</h2>
+        <table>
+            <tr>
+                <th>Nome:</th>
+                <td><input type="text" id="nome" placeholder="Nome"></td>
+            </tr>
+            
+            <tr>
+                <th>Nota Afinação:</th>
+                <td><input type="number" id="afinacao" oninput="calcularTotalFestival()"></td>
+            </tr>
+            <tr>
+                <th>Nota Interação com Instrumentos:</th>
+                <td><input type="number" id="interacao" oninput="calcularTotalFestival()"></td>
+            </tr>
+            <tr>
+                <th>Nota Concepção Total da Obra:</th>
+                <td><input type="number" id="concepcao" oninput="calcularTotalFestival()"></td>
+            </tr>
+            <tr>
+                <th>Nota Harmonia:</th>
+                <td><input type="number" id="harmonia" oninput="calcularTotalFestival()"></td>
+            </tr>
+            <tr>
+                <th>Total:</th>
+                <td><input type="text" id="total" readonly></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="salvarDadosFestival()">Salvar</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="quadro">
+        <h2>Composição:</h2>
+        <table>
+            <tr>
+                <th>Nome:</th>
+                <td><input type="text" id="nomeComposicao" placeholder="Nome"></td>
+            </tr>
+           
+            <tr>
+                <th>Nota Letra:</th>
+                <td><input type="number" id="letra" oninput="calcularTotalComposicao()"></td>
+            </tr>
+            <tr>
+                <th>Nota Melodia:</th>
+                <td><input type="number" id="melodia" oninput="calcularTotalComposicao()"></td>
+            </tr>
+            <tr>
+                <th>Nota Afinação:</th>
+                <td><input type="number" id="afinacaoComposicao" oninput="calcularTotalComposicao()"></td>
+            </tr>
+            <tr>
+                <th>Nota Concepção da Obra:</th>
+                <td><input type="number" id="concepcaoComposicao" oninput="calcularTotalComposicao()"></td>
+            </tr>
+            <tr>
+                <th>Total:</th>
+                <td><input type="text" id="totalComposicao" readonly></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="salvarDadosComposicao()">Salvar</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="quadro">
+        <h2>Ranking do Festival - Interpretação</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="rankingFestivalInterpretacaoTable">
+                <!-- Os dados serão inseridos aqui pelo JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="quadro">
+        <h2>Ranking do Festival - Composição</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="rankingFestivalComposicaoTable">
+                <!-- Os dados serão inseridos aqui pelo JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var rankingFestival = JSON.parse(localStorage.getItem('rankingFestival')) || [];
+            var rankingFestivalInterpretacao = rankingFestival.filter(item => item.categoria === 'Interpretação');
+            var rankingFestivalComposicao = rankingFestival.filter(item => item.categoria === 'Composição');
+
+            rankingFestivalInterpretacao.sort((a, b) => b.total - a.total);
+            rankingFestivalComposicao.sort((a, b) => b.total - a.total);
+
+            var rankingFestivalInterpretacaoTable = document.getElementById('rankingFestivalInterpretacaoTable');
+            rankingFestivalInterpretacao.forEach((item, index) => {
+                var row = rankingFestivalInterpretacaoTable.insertRow();
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                cell1.innerHTML = (index + 1) + "º";
+                cell2.innerHTML = item.nome;
+                cell3.innerHTML = item.categoria;
+                cell4.innerHTML = item.total;
+            });
+
+            var rankingFestivalComposicaoTable = document.getElementById('rankingFestivalComposicaoTable');
+            rankingFestivalComposicao.forEach((item, index) => {
+                var row = rankingFestivalComposicaoTable.insertRow();
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                cell1.innerHTML = (index + 1) + "º";
+                cell2.innerHTML = item.nome;
+                cell3.innerHTML = item.categoria;
+                cell4.innerHTML = item.total;
+            });
+        });
+    </script>
+
+</body>
+</html>
